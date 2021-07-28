@@ -34,9 +34,9 @@ class CategoryController extends Controller
     }
 
 
-    public function show($id)
+    public function show($slug)
     {
-        $category = $this->repository->show($id);
+        $category = $this->repository->show($slug);
 
         if ($category) {
             return response()->json(['category' => $category], Response::HTTP_OK);
@@ -45,9 +45,9 @@ class CategoryController extends Controller
     }
 
 
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, $slug)
     {
-        $category = $this->repository->update($request->validated(), $id);
+        $category = $this->repository->update($request->validated(), $slug);
 
         if ($category) {
             return response()->json(['category' => $category], Response::HTTP_OK);
@@ -55,9 +55,9 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Category not found.'], Response::HTTP_NOT_FOUND);
     }
 
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $isDelete = $this->repository->destroy($id);
+        $isDelete = $this->repository->destroy($slug);
 
         if ($isDelete) {
             return response()->json(['message' => 'Category delete succesfully.'], Response::HTTP_OK);

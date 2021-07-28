@@ -32,9 +32,9 @@ class ProductController extends Controller
     }
 
 
-    public function show($id)
+    public function show($slug)
     {
-        $product = $this->repository->show($id);
+        $product = $this->repository->show($slug);
 
         if ($product) {
             return response()->json(['data' => $product], Response::HTTP_OK);
@@ -44,9 +44,9 @@ class ProductController extends Controller
     }
 
 
-    public function update(StoreProductRequest $request, $id)
+    public function update(StoreProductRequest $request, $slug)
     {
-        $productUpdate = $this->repository->update($request->all(), $id);
+        $productUpdate = $this->repository->update($request->all(), $slug);
 
         if ($productUpdate) {
             return response()->json(['data' => $productUpdate], Response::HTTP_OK);
@@ -56,9 +56,9 @@ class ProductController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $isDestroy = $this->repository->destroy($id);
+        $isDestroy = $this->repository->destroy($slug);
 
         if ($isDestroy) {
             return response()->json(['message' => 'Product deleted succesfully.'], Response::HTTP_OK);

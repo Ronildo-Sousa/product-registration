@@ -13,9 +13,9 @@ class CategoryRepository
         return Category::all();
     }
 
-    public function show(int $id)
+    public function show($slug)
     {
-        $category = Category::find($id);
+        $category = Category::where('slug', $slug)->first();
 
         if ($category) {
             return $category;
@@ -35,9 +35,9 @@ class CategoryRepository
         }
     }
 
-    public function update(array $payload, int $id)
+    public function update(array $payload, $slug)
     {
-        $category = Category::find($id);
+        $category = Category::where($slug)->first();
 
         if ($category) {
             $payload['slug'] = $this->handleSlug(Str::slug($payload['name'], '-'));
@@ -48,9 +48,9 @@ class CategoryRepository
         return null;
     }
 
-    public function destroy(int $id)
+    public function destroy($slug)
     {
-        $category = Category::find($id);
+        $category = Category::where('slug', $slug)->first();
 
         if ($category) {
             $category->delete();

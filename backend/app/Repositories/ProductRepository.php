@@ -11,12 +11,22 @@ class ProductRepository
 {
     public function getAll()
     {
-        return Category::with(['product'])->get();
+        $data = [];
+        $categories = Category::all();
+
+        foreach ($categories as $category) {
+            $data[] = [
+                'category' => $category,
+                'products' => Product::where('category_id', $category->id)->with(['image'])->get()
+            ];
+        }
+
+        return $data;
     }
 
-    public function show(int $id)
+    public function show(string $slug)
     {
-        $product = Product::with(['category', 'image'])->find($id);
+        $product = Product::with(['category', 'image'])->where('slug', $slug)->first();
 
         if ($product) {
             return ['product' => $product];
@@ -36,9 +46,9 @@ class ProductRepository
         return $this->show($product->id);
     }
 
-    public function update(array $payload, $id)
+    public function update(array $payload, $slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
 
         if ($product) {
             $payload['slug'] = $this->handleSlug('lou-douglas');
@@ -50,9 +60,9 @@ class ProductRepository
         return false;
     }
 
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
 
         if ($product) {
             $product->delete();
