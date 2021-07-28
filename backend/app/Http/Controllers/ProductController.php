@@ -20,9 +20,8 @@ class ProductController extends Controller
     {
         $products = $this->repository->getAll();
 
-        return response()->json(['products' => $products], Response::HTTP_OK);
+        return response()->json(['categories' => $products], Response::HTTP_OK);
     }
-
 
 
     public function store(StoreProductRequest $request)

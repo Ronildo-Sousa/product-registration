@@ -3,18 +3,15 @@
 namespace App\Repositories;
 
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Product;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ProductRepository
 {
     public function getAll()
     {
-        return Product::with(['category', 'image'])->paginate(5);
+        return Category::with(['product'])->get();
     }
 
     public function show(int $id)
