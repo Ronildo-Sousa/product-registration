@@ -11,6 +11,7 @@ Route::post('/login', [AuthController::class, 'loginUser'])->name('auth.login');
 Route::get('/', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('products/{slug}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -19,5 +20,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('categories', CategoryController::class)->parameters(['categories' => 'slug']);
 
-    Route::apiResource('products', ProductController::class)->parameters(['products' => 'slug'])->except(['show', 'index']);
+    Route::apiResource('products', ProductController::class)->parameters(['products' => 'slug'])->except(['show', 'index', 'search']);
 });

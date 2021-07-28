@@ -60,6 +60,17 @@ class ProductRepository
         return false;
     }
 
+    public function search(string $search)
+    {
+        $products = Product::where('name', 'LIKE', '%' . $search . '%')->get();
+
+        if ($products) {
+            return ['products' => $products];
+        }
+
+        return null;
+    }
+
     public function destroy($slug)
     {
         $product = Product::where('slug', $slug)->first();

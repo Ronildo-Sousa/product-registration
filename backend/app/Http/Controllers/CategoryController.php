@@ -55,6 +55,7 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Category not found.'], Response::HTTP_NOT_FOUND);
     }
 
+
     public function destroy($slug)
     {
         $isDelete = $this->repository->destroy($slug);

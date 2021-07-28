@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
@@ -53,6 +54,16 @@ class ProductController extends Controller
         }
 
         return response()->json(['message' => 'Product was not updated.'], Response::HTTP_NOT_FOUND);
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $products = $this->repository->search($request->search);
+
+        if ($products) {
+            return response()->json(['data' => $products], Response::HTTP_OK);
+        }
+        return response()->json(['message' => 'Product not found.'], Response::HTTP_NOT_FOUND);
     }
 
 
