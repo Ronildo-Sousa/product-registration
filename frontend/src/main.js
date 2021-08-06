@@ -8,6 +8,7 @@ const http = axios.create({
     baseURL: process.env.VUE_APP_BASE_URL
 })
 http.defaults.withCredentials = true;
+http.defaults.headers.Authorization = localStorage.getItem('user-token')
 
 const app = createApp(App)
 app.config.globalProperties.$axios = http;

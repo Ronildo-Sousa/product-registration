@@ -12,6 +12,7 @@ Route::get('/', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('products/{slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
+Route::get('/products-all', [ProductController::class, 'all'])->name('products.all');
 
 
 Route::middleware('auth:sanctum')->group(function () {

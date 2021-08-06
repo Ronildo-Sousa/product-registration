@@ -17,6 +17,13 @@ class ProductController extends Controller
         $this->repository =  $repository;
     }
 
+    public function all()
+    {
+        $products = $this->repository->all();
+
+        return response()->json(['products' => $products], Response::HTTP_OK);
+    }
+
     public function index()
     {
         $products = $this->repository->getAll();

@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 
 class ProductRepository
 {
+    public function all()
+    {
+        return Product::paginate(6);
+    }
+
     public function getAll()
     {
         $data = [];
