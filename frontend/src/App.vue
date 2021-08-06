@@ -1,13 +1,20 @@
 <template>
   <div>
-    <router-link to="/">Home</router-link> |
-  </div>
+    
   <router-view/>
+  </div>
 </template>
  
  <script>
+//  import app from './services/app'
+
  export default {
-   name: 'App'
+   name: 'App',
+   mounted() {
+    //  app.getHome().then(response => {
+    //    console.log(response)
+    //  })
+   },
  }
  </script>
 
